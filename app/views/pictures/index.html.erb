@@ -1,0 +1,25 @@
+
+<h1 class="title">Picture Rails</h1>
+  <p><%= notice %></p>
+    <table>
+      <tr>
+        <th>ユーザーネーム</th>
+        <th>タイトル</th>
+        <th>コメント</th>
+      </tr>
+        <% @pictures.each do |picture| %>
+      <tr>
+        <td><%= picture.user.name %></td>
+        <td><%= picture.title %></td>
+        <td><%= picture.content %></td>
+        <td><%= link_to '詳細を確認する', picture_path(picture.id) %></td>
+        <td><%= link_to '編集する', edit_picture_path(picture.id) %></td>
+        <td><%= link_to '削除する', picture_path(picture.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
+      </tr>
+      <% end %>
+    </table>
+  <%= link_to '新しくピクチャーズを投稿する', new_picture_path %>
+
+  <footer class="footer">
+    <p>Copyright © 2020 株式会社Wing</p>
+  </footer>
