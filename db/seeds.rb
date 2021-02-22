@@ -6,5 +6,5 @@
      email: email,
      password: password,
      image: open("./db/fixtures/icon1.jpg")
-                 )
+  )
 end
