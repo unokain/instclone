@@ -1,3 +1,9 @@
 <h1><%= @user.name %>のページ</h1>
 <p>メールアドレス: <%= @user.email %></p>
+<p>
+  <strong>Image:</strong>
+  <%= image_tag @user.image.url %>
+</p>
+<%= link_to 'お気に入り一覧', favorite_path(@user.id) %> |
+<%= link_to 'プロフィールを編集する', edit_user_path(@user) %> |
 <%= link_to "ピクチャーズ一覧画面にもどる", pictures_path %>

@@ -16,9 +16,6 @@
           <li>
             <%= link_to 'ホーム', pictures_path %>
           </li>
-          <% flash.each do |key, value| %>
-            <%= content_tag(:div, value, class: "#{key}") %>
-          <% end %>
           <% if logged_in? %>
             <li class = "log"><%= link_to "プロフィール", user_path(current_user.id) %></li>
             <li class = "log"><%= link_to "ログアウト", session_path(current_user.id), method: :delete %></li>

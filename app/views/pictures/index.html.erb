@@ -1,6 +1,5 @@
 
 <h1 class="title">Picture Rails</h1>
-  <p><%= notice %></p>
     <table>
       <tr>
         <th>ユーザーネーム</th>
@@ -13,8 +12,10 @@
         <td><%= picture.title %></td>
         <td><%= picture.content %></td>
         <td><%= link_to '詳細を確認する', picture_path(picture.id) %></td>
-        <td><%= link_to '編集する', edit_picture_path(picture.id) %></td>
-        <td><%= link_to '削除する', picture_path(picture.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
+        <% if current_user.id == picture.user_id%>
+          <td><%= link_to '編集する', edit_picture_path(picture.id) %></td>
+          <td><%= link_to '削除する', picture_path(picture.id), method: :delete, data: { confirm: '本当に削除していいですか？' } %></td>
+        <% end %>
       </tr>
       <% end %>
     </table>

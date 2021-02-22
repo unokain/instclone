@@ -1,0 +1,17 @@
+<h1 class="title">お気に入り</h1>
+  <table>
+    <tr>
+      <th>ユーザーネーム</th>
+      <th>タイトル</th>
+      <th>コメント</th> 
+    </tr>
+    <%@pictureId.each do |id|%>
+    <tr>
+      <td><%= @pictures.find(id).user.name %></td>
+      <td><%= @pictures.find(id).title %></td>
+      <td><%= @pictures.find(id).content %></td>
+      <td><%= link_to '詳細を確認する', picture_path(id) %></td>
+    </tr>
+    <% end %>
+  </table>
+<%= link_to 'プロフィールに戻る', user_path(@user) %> 

@@ -1,5 +1,7 @@
 class PicturesController < ApplicationController
+    before_action :set_current_user, :authenticate_user
     before_action :set_picture, only: [:show, :edit, :update, :destroy]
+    before_action :ensure_current_user_picture, {only: [:edit, :update, :destroy]}
   def index
     @pictures = Picture.all 
   end
@@ -17,6 +19,8 @@ class PicturesController < ApplicationController
       render :new
     else
       if @picture.save
+        @user=User.find(@picture.user_id)
+        ContactMailer.contact_mail(@picture,@user).deliver
         redirect_to pictures_path
       else
         render :new
@@ -25,6 +29,7 @@ class PicturesController < ApplicationController
   end
   def show
     @picture = Picture.find(params[:id])
+    @favorite = current_user.favorites.find_by(picture_id: @picture.id)
   end
   def edit
     @picture = Picture.find(params[:id])
@@ -51,5 +56,11 @@ class PicturesController < ApplicationController
   end
   def set_picture
    @picture = Picture.find(params[:id])
+  end
+  def ensure_current_user_picture
+    if current_user.id != @picture.user_id
+      flash[:notice]="権限がありません"
+      redirect_to new_session_path
+    end
   end
 end

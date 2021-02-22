@@ -5,5 +5,5 @@ module PicturesHelper
     elsif action_name == 'edit'
       picture_path
     end
-  end      
+  end
 end
